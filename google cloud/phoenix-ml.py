@@ -1,17 +1,12 @@
-import argparse
-import io
-
 from google.cloud import vision
 from google.cloud.vision import types
 
 
-def main(image_file):
+def fire_vision(input_image):
     client = vision.ImageAnnotatorClient()
 
-    with io.open(image_file, 'rb') as image_file:
-        content = image_file.read()
-
-    image = types.Image(content=content)
+    #TODO: figure out what format we are recieving image data in and covert it to this
+    image = types.Image(content=input_image)
 
     response = client.label_detection(image=image)
     labels = response.label_annotations
@@ -22,9 +17,3 @@ def main(image_file):
 		if (label.description == fire)
 			moveForward()
 
-
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('image_file', help='The image you\'d like to label.')
-    args = parser.parse_args()
-    main(args.image_file)
