@@ -1,7 +1,6 @@
 import ps_drone
 import time
 
-
 class Drone:
 	def __init__(self):
 		self.drone = ps_drone.Drone()
