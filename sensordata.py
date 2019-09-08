@@ -2,6 +2,9 @@ import time, sys
 import ps_drone  
 import json                                   # Import PS-Drone-API
 
+
+#drone reset, sensor config 
+
 drone = ps_drone.Drone()                           # Start using drone
 drone.startup()                                    # Connects to drone and starts subprocesses
 
@@ -11,11 +14,10 @@ print "Battery: "+str(drone.getBattery()[0])+"% "+str(drone.getBattery()[1]) # B
 drone.useDemoMode(False)                           # Give me everything...fast
 drone.getNDpackage(["demo","pressure_raw","altitude","magneto","wifi"]) # Packets to decoded
 time.sleep(0.5)  
-reset   
+#reset #idk wat this does it was in the documentation   
+drone.trim() 
 
-
-
-
+#main
 
 
 NDC = drone.NavDataCount
