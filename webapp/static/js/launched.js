@@ -33,6 +33,7 @@ function initDrone() {
 
 function sendCommand(x) {
 	if (x == commands.length) {
+		$("#consoleText").append("<span>> Mission complete</span><br>");
 		return;
 	}
 	$("#consoleText").append("<span>" + info[x] + "</span><br>");
