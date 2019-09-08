@@ -1,8 +1,9 @@
+import base64
 import math
-
+import cv2
 import ps_drone
 import time
-
+import PhoenixVision
 
 class Drone:
 	def __init__(self):
@@ -43,7 +44,10 @@ class Drone:
 			while self.drone.VideoImageCount == IMC: time.sleep(0.01)  # Wait until the next video-frame
 			IMC = self.drone.VideoImageCount
 			img = self.drone.VideoImage
-			fire_detected = True  # TODO: implement gcp vision
+			# Convert img to base64
+			retval, buffer = cv2.imencode('.jpg', img)
+			img64 = base64.b64encode(buffer)
+			fire_detected = PhoenixVision.detect_image(img64)
 
 	def connect(self):
 		if not self.connected:

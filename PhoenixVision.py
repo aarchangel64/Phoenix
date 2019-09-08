@@ -16,11 +16,9 @@ def detect_image(image):
 	try:
 		for c in dict_google_response['responses'][0]['labelAnnotations']:
 			if c['description'] == "Fire" or c['description'] == "Heat" or c['description'] == "Flame":
-				print("fire detected")
-				# moveForward()
-				break
+				return True
 	except json.decoder.JSONDecodeError:
-		print("Fire not detected")
+		return False
 
 
 def request_vision_api(image):
