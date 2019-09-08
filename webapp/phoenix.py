@@ -34,7 +34,9 @@ def runCommand():
 # JSON Data from drone
 @app.route('/data', methods=['GET'])
 def getData():
-	return '{ "altitude":"10", "speed":5, "accel":"2", "battery":"90" }'
+	drone.getNavData()
+	return jsonify({'altitude': drone.altitude, 'speed': drone.speed, 'accel': 0, 'battery':drone.battery})
+
 
 if __name__ == '__main__':
 	app.run()
