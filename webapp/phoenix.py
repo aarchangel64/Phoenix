@@ -1,10 +1,12 @@
 # Python 2.7
-import drone
+import fire_drone
 import json
 import time
 
 from flask import Flask, render_template, request
 app = Flask(__name__)
+
+drone = fire_drone.Drone()
 
 @app.route('/')
 def index():
