@@ -1,7 +1,7 @@
 (function($) {
 	setInterval(function() { 
 		updatePage();
-	}, 3000);
+	}, 100);
 
 	window.onload = function() {
 		initDrone();
@@ -15,7 +15,10 @@ function updatePage() {
 		type: "GET",
 		dataType: "json",
         success: function (data) {
-            console.log(JSON.stringify(data));
+            $("#consoleAlt").text(data.altitude);
+            $("#consoleSpeed").text(data.speed);
+            $("#consoleAccel").text(data.accel);
+            $("#consoleBatt").text(data.battery);
         }
 	});
 }
@@ -34,13 +37,15 @@ function sendCommand(x) {
 	}
 	$("#consoleText").append("<span>" + info[x] + "</span><br>");
 	$.ajax({
-			url: "/command",
-			type: "POST",
-			data: commands[x],
-			success: function(){
-				setTimeout(sendCommand(x + 1), 20);
-			}
-		});
+		url: "/command",
+		type: "POST",
+		contentType: 'application/json;charset=UTF-8',
+		dataType: "json",
+		data: JSON.stringify({ "command": commands[x] }),
+		success: function() {
+			setTimeout(sendCommand(x + 1), 20);
+		}
+	});
 }
 
 function liftOffAnimation() {

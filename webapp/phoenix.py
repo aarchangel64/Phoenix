@@ -1,9 +1,8 @@
 # Python 2.7
 import fire_drone
-import json
 import time
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 app = Flask(__name__)
 
 drone = fire_drone.Drone()
@@ -19,21 +18,23 @@ def launch():
 #Commands to drone
 @app.route('/command', methods=['POST'])
 def runCommand():
-	print "hello"
-	time.sleep(2)
-	print request.data
-	return
-	#drone.connect()
-
-	#drone.liftOff()
-	#drone.findFire()
-	#drone.fightFire()
-	#drone.land()
+	command = request.get_json()['command']
+	if command == "connect":
+		drone.connect()
+	elif command == "liftOff":
+		drone.liftOff()
+	elif command == "findFire":
+		drone.findFire()
+	elif command == "fightFire":
+		drone.fightFire()
+	elif command == "land":
+		drone.land()
+	return ('', 204)
 
 # JSON Data from drone
 @app.route('/data', methods=['GET'])
 def getData():
-	return '{ "name":"John", "age":30, "city":"New York"}'
+	return '{ "altitude":"10", "speed":5, "accel":"2", "battery":"90" }'
 
 if __name__ == '__main__':
 	app.run()
