@@ -1,7 +1,7 @@
 import time, sys
 import ps_drone  
 import json                                   # Import PS-Drone-API
-
+import math
 
 #drone reset, sensor config 
 
@@ -26,13 +26,14 @@ while not end:
     while drone.NavDataCount==NDC:  time.sleep(0.001) # Wait until next time-unit
     if drone.getKey():              end = True        # Stop if any key is pressed
     NDC=drone.NavDataCount
+    navData = drone.NavData
+    velocity = navData["demo"][4] # Get velocity vector
+    speed = math.sqrt(velocity[0]**2 + velocity[1]**2 + velocity[2]**2)
     print "-----------"
-  
-    print(json.dumps("Altitude: "+str(drone.NavData["altitude"][3])))
 
-    print(json.dumps("Battery: "+str(drone.getBattery()[0])+"% "+str(drone.getBattery()[1]))) #battery percentage, if battery is too low or not
-
-    print(json.dumps( "Windspeed: " +str(drone.getwind_speed()[0])))
+    print(json.dumps("Altitude: " + str(navData["altitude"][3])))
+    print(json.dumps("Battery: " + str(drone.getBattery()[0]))) #battery percentage, if battery is too low or not
+    print(json.dumps("Speed: " + str(speed)))
 
 
     
