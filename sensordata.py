@@ -28,11 +28,11 @@ while not end:
     NDC=drone.NavDataCount
     print "-----------"
   
-    print json.dump("Altitude: "+str(drone.NavData["altitude"][3]))) 
+    print(json.dumps("Altitude: "+str(drone.NavData["altitude"][3])))
 
-    print json.dump("Battery: "+str(drone.getBattery()[0])+"% "+str(drone.getBattery()[1])) #battery percentage, if battery is too low or not 
+    print(json.dumps("Battery: "+str(drone.getBattery()[0])+"% "+str(drone.getBattery()[1]))) #battery percentage, if battery is too low or not
 
-    print json.dump( "Windspeed: " +str(drone.getwind_speed()[0])) 
+    print(json.dumps( "Windspeed: " +str(drone.getwind_speed()[0])))
 
 
     
