@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Phoenix</title>
+
+	<link rel="stylesheet" href="static/style/launched.css">
+	<link rel="icon" type="image/png" sizes="32x32" href="static/images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="static/images/favicon-16x16.png">
+
+	<script
+	  src="https://code.jquery.com/jquery-3.4.1.min.js"
+	  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+	  crossorigin="anonymous">
+	</script>
+</head>
+<body>
+	<div id="launchAnimation">
+		<img id="drone" src="static/images/drone.png" />
+		<img id="landingPad" src="static/images/landing.jpg" />
+	</div>
+	
+	<div id="liveVideo">
+	</div>
+
+	<div id="console">
+		<p id="consoleText"></p>
+		<p id="consoleData">
+			Altitude: <span id="consoleAlt">10</span> m | Speed: <span id="consoleSpeed">10</span> m/s | Accel: <span id="consoleAccel">1</span> m/s | Battery: <span id="consoleBatt">50</span>% <br>
+			Carbon Monoxide: <span id="consoleCarbon">0</span> PPM | Temperature <span id="consoleTemp">75</span>°C
+		</p>
+	</div>
+
+	<script src="static/js/launched.js"></script>
+</body>
+</html>
