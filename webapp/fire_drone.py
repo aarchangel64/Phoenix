@@ -1,3 +1,5 @@
+import math
+
 import ps_drone
 import time
 
@@ -6,6 +8,10 @@ class Drone:
 	def __init__(self):
 		self.drone = ps_drone.Drone()
 		self.connected = False
+		self.altitude = 0
+		self.speed = 0
+		self.accel = 0
+		self.battery = 0
 
 	def __setup(self):
 		# drone reset, sensor config
@@ -24,6 +30,7 @@ class Drone:
 		self.drone.frontCam()  # Choose front view
 		CDC = self.drone.ConfigDataCount
 		while CDC == self.drone.ConfigDataCount: time.sleep(0.0001)  # Wait until it is done (after resync is done)
+		#self.getNavData()
 		self.drone.startVideo()  # Start video-function
 		self.drone.showVideo()
 		self.connected = True
@@ -36,25 +43,32 @@ class Drone:
 			while self.drone.VideoImageCount == IMC: time.sleep(0.01)  # Wait until the next video-frame
 			IMC = self.drone.VideoImageCount
 			img = self.drone.VideoImage
-			fire_detected = True #TODO: implement gcp vision
+			fire_detected = True  # TODO: implement gcp vision
 
 	def connect(self):
 		if not self.connected:
 			self.__setup()
 
+	def getNavData(self):
+		navData = self.drone.NavData
+		self.altitude = navData["altitude"][3]
+		self.battery = self.drone.getBattery()[0]
+		velocity = navData["demo"][4]  # Get velocity vector
+		self.speed = math.sqrt(velocity[0] ** 2 + velocity[1] ** 2 + velocity[2] ** 2)
+
 	def liftOff(self):
 		self.drone.takeoff()
-		time.sleep(8) # Time required for the drone to takeoff, as drone functions are non-blocking
+		time.sleep(8)  # Time required for the drone to takeoff, as drone functions are non-blocking
 
 	def findFire(self):
 		self.drone.turnRight(0.5)
-		self.__gcp_detect() # Blocks until fire has been detected
+		self.__gcp_detect()  # Blocks until fire has been detected
 		self.drone.stop()
-		time.sleep(1) # Wait for the drone to stop
+		time.sleep(1)  # Wait for the drone to stop
 
 	def fightFire(self):
 		return
 
 	def land(self):
 		self.drone.land()
-		time.sleep(8) # Time required for the drone to land, as drone functions are non-blocking
+		time.sleep(8)  # Time required for the drone to land, as drone functions are non-blocking
