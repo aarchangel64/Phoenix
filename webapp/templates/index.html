@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Phoenix</title>
+	
+	<link rel="icon" type="image/png" sizes="32x32" href="static/images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="static/images/favicon-16x16.png">
+	<link rel="stylesheet" href="static/style/main.css">
+	
+	<script
+	  src="https://code.jquery.com/jquery-3.4.1.min.js"
+	  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+	  crossorigin="anonymous">
+	</script>
+</head>
+<body>
+	<div id="location">
+		<iframe id="map" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d24454.81085925978!2d-75.196572!3d39.989427!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c6c654145fb7b3%3A0x857be4f5a4f90a20!2sPhiladelphia%2C%20PA%2019104!5e0!3m2!1sen!2sus!4v1567880335750!5m2!1sen!2sus" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+	</div>
+	
+	<form action="/launch" method="post" id="launchForm">
+		<img src="static/images/logo.png" class="grayscale" />
+		<span id="launchButton" align="center">
+			<a id="launch" onclick="$('#launchForm').submit()">Launch Drone</a>
+		</span>
+		<img src="static/images/logo.png" class="grayscale" />
+	</form>
+	
+	<script src="static/js/main.js"></script>
+</body>
+</html>

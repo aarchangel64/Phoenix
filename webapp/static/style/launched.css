@@ -1,0 +1,78 @@
+html, body {
+	height: 100vh;
+	min-height: 100vh;
+	overflow: hidden;
+}
+
+body {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 1fr;
+	align-items: center;
+	background-color: #EEEEEE;
+}
+
+img {
+	max-height: 100%;
+	max-width: 100%;
+}
+
+#drone {
+	height: 400px;
+	width: auto;
+	position: absolute;
+	bottom: 0;
+	left: 28%;
+	z-index: 2;
+}
+
+#landingPad {
+	position: absolute;
+	bottom: 0;
+	width: 50%;
+	left: 25%;
+	height: auto;
+	z-index: 1;
+}
+
+
+#launchAnimation {
+	grid-column: 1;
+	grid-row: 1 / 3;
+	height: 100%;
+	width: 100%;
+	position: relative;
+}
+
+#liveVideo {
+	grid-column: 2;
+	grid-row: 1;
+	height: 100%;
+	width: 100%;
+}
+
+#console {
+	grid-column: 2;
+	grid-row: 2;
+	height: 100%;
+	width: 100%;
+	background-color: black;
+	color: white;
+  	font: 1.5rem Inconsolata, monospace;
+  	text-shadow: 0 0 5px #C8C8C8;
+  	border-radius: 10px;
+}
+
+#consoleText {
+	width: 100%;
+	height: auto;
+	margin: 20px 0px 0px 30px;
+}
+
+#consoleData {
+	width: 100%;
+	height: auto;
+	margin-left: 30px;
+	position: absolute;
+	bottom: 0;
+}
